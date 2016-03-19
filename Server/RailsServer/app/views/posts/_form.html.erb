@@ -1,0 +1,30 @@
+<%= form_for(@post, html: { id: "post_form" }) do |f| %>
+  <div class="field">
+      <label>Foods</label>
+    <%= f.text_field :item, :required => true, class: "form-control" %>
+  </div>
+  <div class="field">
+    <%= f.label :descritpion %><br>
+    <%= f.text_field :description, class: "form-control" %>
+  </div>
+  <div class="field">
+    <%= f.label :quantity %><br>
+    <%= f.text_field :quantity, class: "form-control", "placeholder" => "E-mail" %>
+  </div>
+  <div class="field">
+    <%= f.label :available_time_start %><br>
+    <%= f.datetime_select :available_time_start, class: "form-control" %>
+  </div>
+  <div class="field">
+    <%= f.label :available_time_end %><br>
+    <%= f.datetime_select :available_time_end, class: "form-control" %>
+  </div>
+  <div class="field">
+    <%= f.label :expir %><br>
+    <%= f.date_field :expir, class: "form-control" %>
+  </div>
+  <div class="actions">
+      <%= f.submit "Submit" , class:"btn btn-success "%>
+    <button type="reset" class="btn btn-default">Reset</button>
+  </div>
+<% end %>

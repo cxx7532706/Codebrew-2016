@@ -2,12 +2,21 @@ Rails.application.routes.draw do
 
   root 'users#index'
   match '/collect' => 'posts#collect', via: :post#, as: 'collect'
-  #match '/testpost' => 'posts#testpost', via: :get#, as: 'login'
+  match '/testpost' => 'posts#testpost', via: :get#, as: 'login'
+
+  match '/modifyStatus' => 'posts#modifyStatus', via: :post
+  match '/modifyStatusAgain' => 'posts#modifyStatusAgain', via: :post
+  match '/getPickUpList' => 'posts#getPickUpList', via: :post
 
   resources :users
   post 'login', to: 'users#login'
-  
-  resources :posts
+  get 'confirms', to: 'posts#confirms'
+
+  resources :posts do
+    member do
+      get 'confirm'
+    end
+  end
 
   namespace :api do
     resources :posts, defaults: { format: 'json' }

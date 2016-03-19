@@ -1,46 +1,11 @@
-<h1>Post new food information</h1>
+<div class="col-md-offset-3 col-md-6 col-md-offset-3"%>
+  <div class="panel panel-default">
+  <div class="panel-heading"><h2><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span><br>New Donation</h2></div>
+    <div class="panel-body">
 
-<%= form_for @post do |f| %>
-	<p>
-    <%= f.label 'Food:' %></br>
-    <%= f.text_field :item %></br>
-  </p>
-  <p>
-    <%= f.label 'Description:' %></br>
-    <%= f.text_field :description %></br>
-  </p>
-  <p>
-    <%= f.label 'Quantity (kg):' %></br>
-    <%= f.text_field :quantity %></br>
-  </p>
-  <p>
-    <%= f.label 'Location:' %></br>
-    <%= f.text_field :loc %></br>
-  </p>
-  <p>
-    <%= f.label 'Provider:' %></br>
-    <%= f.text_field :super %></br>
-  </p>
-  <p>
-    <%= f.label 'Organization:' %></br>
-    <%= f.text_field :org %></br>
-  </p>
-  <p>
-    <%= f.label 'Expire date:' %></br>
-    <%= f.datetime_select :expir, :default => DateTime.now %></br>
-  </p>
-  <p>
-    <%= f.label 'Available from:' %></br>
-    <%= f.datetime_select :available_time_start, :default => DateTime.now %></br>
-  </p>
-  <p>
-    <%= f.label 'Available to:' %></br>
-    <%= f.datetime_select :available_time_end, :default => DateTime.now %></br>
-  </p>
-  <p>
-    <%= f.label 'Picture:' %></br>
-  </p>
-  <p>
-    <%= f.submit "Add a new post" %>
-  </p>
-<% end %>
+		<%= render 'form' %>
+
+   </div>
+  </div>
+  <%= link_to 'Back', posts_path, :class =>"btn btn-primary btn-sm white-font" %>
+</div>

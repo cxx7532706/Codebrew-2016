@@ -2,7 +2,15 @@ require 'json'
 
 class PostsController < ApplicationController
 
-  protect_from_forgery :secret => 'any_phrase', :except => :collect
+  protect_from_forgery :secret => 'any_phrase', :except => :collect,:except => :modifyStatus,:except => :getPickUpList, :except => :modifyStatusAgain
+
+  def confirm
+    redirect_to :confirms
+  end
+  def confirms
+
+    @posts = Post.all
+  end
 
 	def index
     #include Paperclip::Glue
@@ -17,18 +25,99 @@ class PostsController < ApplicationController
   end
 
   def collect
+    #puts request.headers
+
+    #username = request.headers["Username"]
+    #password = request.headers["Password"]
+
+   # render text: 1
+   puts request.headers
+
+    username = request.headers["Username"]
+    password = request.headers["Password"]
+
+    users = User.all
+    user_id = 'None'
+    users.each do |user|
+        if user.email == username && user.password == password
+          if user.user_type == 'Charity'
+            user_id = user.id.to_s
+          end
+        end
+    end
+
+    render text: user_id
+  end
+
+  def getPickUpList
     puts request.headers
+    charity = request.headers["Charity"]
 
-    @username = request.headers["Username"]
-    @password = request.headers["Password"]
+    #newposts = Post.where(org: charity).find_each
+    newposts = Post.where(status: 1).where(org: charity).find_each
 
-    render text: 1
+    respond_to do |format|
+      format.json { render :json => newposts }
+    end
+
+  end
+
+  def modifyStatus
+    puts request.headers
+    item = request.headers["Name"]
+    provider = request.headers["Provider"]
+    charity = request.headers["Charity"]
+
+    posts = Post.all
+
+    posts.each do |post|
+      if post.item == item && post.super == provider
+        post.org = charity
+        post.status = 1
+        post.save
+      end
+    end
+
+    newposts = Post.where(status: 0).find_each
+
+    respond_to do |format|
+      format.json { render :json => newposts }
+    end
+  end
+
+  def modifyStatusAgain
+    puts request.headers
+    item = request.headers["Name"]
+    provider = request.headers["Provider"]
+    charity = request.headers["Charity"]
+
+    posts = Post.all
+
+    posts.each do |post|
+      if post.item == item && post.super == provider && post.org == charity
+        post.status = 2
+        post.save
+      end
+    end
+
+    newposts = Post.where(status: 1).where(org: charity).find_each
+
+    respond_to do |format|
+      format.json { render :json => newposts }
+    end
+
   end
 
   def testpost
+<<<<<<< HEAD
     #@params = {'Username' => 'It is ethics. It is honor. -Emily Post', 
     #  'Password' => 'Submit'}
     #@x = Net::HTTP.post_form(URI.parse('https://go-get-it.herokuapp.com/collect'), @params)
+=======
+    @params = {'Username' => 'It is ethics. It is honor. -Emily Post',
+      'Password' => 'Submit'}
+    @x = Net::HTTP.post_form(URI.parse('https://go-get-it.herokuapp.com/collect'), @params)
+>>>>>>> ff86c0e3efa1170196b83f86c2ae10904ec9c964
     #render text: @x.body
 
     #connection.post("https://go-get-it.herokuapp.com/collect", );

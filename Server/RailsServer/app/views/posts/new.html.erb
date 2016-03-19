@@ -1,5 +1,47 @@
 <h1>Post new food information</h1>
 
-<%= form_for @post do |post| %>
-	
+<%= form_for @post do |f| %>
+	<p>
+    <%= f.label 'Food:' %></br>
+    <%= f.text_field :item %></br>
+  </p>
+  <p>
+    <%= f.label 'Description:' %></br>
+    <%= f.text_field :description %></br>
+  </p>
+  <p>
+    <%= f.label 'Quantity (kg):' %></br>
+    <%= f.text_field :quantity %></br>
+  </p>
+  <p>
+    <%= f.label 'Location:' %></br>
+    <%= f.text_field :loc %></br>
+  </p>
+  <p>
+    <%= f.label 'Provider:' %></br>
+    <%= f.text_field :super %></br>
+  </p>
+  <p>
+    <%= f.label 'Organization:' %></br>
+    <%= f.text_field :org %></br>
+  </p>
+  <p>
+    <%= f.label 'Expire date:' %></br>
+
+    <%= f.datetime_select :expir, :default => DateTime.now %></br>
+  </p>
+  <p>
+    <%= f.label 'Available from:' %></br>
+    <%= f.datetime_select :available_time_start, :default => DateTime.now %></br>
+  </p>
+  <p>
+    <%= f.label 'Available to:' %></br>
+    <%= f.datetime_select :available_time_end, :default => DateTime.now %></br>
+  </p>
+  <p>
+    <%= f.label 'Picture:' %></br>
+  </p>
+  <p>
+    <%= f.submit "Add a new post" %>
+  </p>
 <% end %>

@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     @users = User.all
     @jump = 0
     @users.each do |user|
-      if user.name == @check_user.name
+      if user.email == @check_user.email
         if user.password == @check_user.password
           @jump = user.user_type
         end
@@ -90,6 +90,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :password, :location, :user_type)
+      params.require(:user).permit(:name, :password, :location, :user_type, :email)
     end
 end

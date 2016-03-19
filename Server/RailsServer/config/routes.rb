@@ -2,8 +2,7 @@ Rails.application.routes.draw do
 
   root 'users#index'
   match '/collect' => 'posts#collect', via: :post#, as: 'collect'
-  match '/testpost' => 'posts#testpost', via: :get#, as: 'login'
-
+  #match '/testpost' => 'posts#testpost', via: :get#, as: 'login'
 
   resources :users
   post 'login', to: 'users#login'

@@ -4,10 +4,7 @@ class Api::PostsController < ApplicationController
     @posts = Post.all
     
     respond_to do |format|
-      format.json
-      {
-        render :json => @posts
-      }
+      format.json { render :json => @posts }
     end
   end
 end

@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   match '/collect' => 'posts#collect', via: :post#, as: 'collect'
   match '/testpost' => 'posts#testpost', via: :get#, as: 'login'
 
-  resources :users
+  resources :users do
+    get 'go_check' => 'users#check'
+  end
 
   resources :posts
 

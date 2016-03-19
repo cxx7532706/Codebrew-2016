@@ -61,6 +61,27 @@ class UsersController < ApplicationController
     end
   end
 
+  def check
+    @check_user = User.new(user_params)
+    @users = User.all
+    @jump = 0
+    @users.each do |user|
+      if user.name == @check_user.name
+        if user.password == @check_user.name
+          @jump = user.user_type
+        end
+      end
+    end
+  #  if @jump = 0
+  #    format.html { redirect_to @user, notice: 'Username or Password is not matched.'}
+  #  elsif @jump = 1 # when user is donater
+  #    format.html { redirect_to}
+  #  elsif @jump = 2 #when user is collecter
+  #    format.html {redirect_to}     
+  #  end
+
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user

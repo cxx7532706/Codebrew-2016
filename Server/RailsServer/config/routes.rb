@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   match '/collect' => 'posts#collect', via: :post#, as: 'collect'
   match '/testpost' => 'posts#testpost', via: :get#, as: 'login'
 
+  resources :users
+
   resources :posts
 
   namespace :api do

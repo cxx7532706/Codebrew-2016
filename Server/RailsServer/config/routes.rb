@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   match '/collect' => 'posts#collect', via: :post#, as: 'collect'
   match '/testpost' => 'posts#testpost', via: :get#, as: 'login'
 
+  match '/modifyStatus' => 'posts#modifyStatus', via: :post
+  match '/modifyStatusAgain' => 'posts#modifyStatusAgain', via: :post
+  match '/getPickUpList' => 'posts#getPickUpList', via: :post
 
   resources :users
   post 'login', to: 'users#login'

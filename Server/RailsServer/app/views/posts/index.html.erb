@@ -1,7 +1,13 @@
-<h1> Index </h1>
+<h1> Waiting to be collected: </h1>
 
-<% @posts.each do |post| %>
-  <h2> <%= link_to post.item, post %> </h2>
+<% @newPosts.each do |post| %>
+  <h2> <%= link_to post.item, post %> <%= post.quantity %> kg </h2>
+<% end %>
+
+<h1> Accepted: </h1>
+
+<% @accepted.each do |post| %>
+  <h2> <%= link_to post.item, post %> <%= post.quantity %> kg </h2>
 <% end %>
 
 <p> <%= link_to 'Add new food', new_post_path %> </p>

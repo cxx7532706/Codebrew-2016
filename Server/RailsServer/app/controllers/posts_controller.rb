@@ -6,8 +6,8 @@ class PostsController < ApplicationController
 
 	def index
     #include Paperclip::Glue
-
-    @posts = Post.all
+    @accepted = Post.where(status: 1)
+    @newPosts = Post.where(status: 0)
 	end
 
   def show
@@ -44,7 +44,7 @@ class PostsController < ApplicationController
     available_time_end = DateTime.new(params[:post]["available_time_end(1i)"].to_i, params[:post]["available_time_end(2i)"].to_i, params[:post]["available_time_end(3i)"].to_i, params[:post]["available_time_end(4i)"].to_i, params[:post]["available_time_end(5i)"].to_i)
 
     @post = Post.new(post_params)
-
+    @post.update(status: 0)
     @post.update(expir: expir)
     @post.update(available_time_start: available_time_start)
     @post.update(available_time_end: available_time_end)

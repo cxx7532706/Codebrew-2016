@@ -11,28 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160319005327) do
+ActiveRecord::Schema.define(version: 20160319062715) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "orgs", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "identity"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "posts", force: :cascade do |t|
     t.string   "item"
     t.integer  "quantity"
-    t.integer  "expir"
-    t.integer  "picktime"
     t.string   "loc"
     t.string   "super"
     t.string   "org"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.datetime "expir"
+    t.datetime "available_time_start"
+    t.datetime "available_time_end"
+    t.integer  "status"
+    t.string   "image"
+    t.datetime "picktime"
+    t.string   "description"
   end
 
 end

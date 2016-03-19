@@ -1,10 +1,14 @@
 class PostsController < ApplicationController
 
 	def index
+    #include Paperclip::Glue
+
     @posts = Post.all
 	end
 
   def show
+    #include Paperclip::Glue
+
     @post = Post.find(params[:id])
   end
 

@@ -7,6 +7,8 @@ gem 'rails', '4.2.5.1'
 gem 'pg', '~> 0.15'
 # API
 gem 'rails-api'
+# Picture upload
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets

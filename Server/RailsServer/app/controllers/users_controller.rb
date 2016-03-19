@@ -46,6 +46,8 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
+    puts "fuck"
+    puts @user.user_type
 
     respond_to do |format|
       if @user.save

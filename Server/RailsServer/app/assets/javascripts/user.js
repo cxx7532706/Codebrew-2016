@@ -1,9 +1,8 @@
 function change_user_type(){
     var t = $('#userType').val();
-    if(t==0){
+    if(t=="Doner"){
         show_div($('#donerLocation'));
-    }
-    if(t==1){
+    }else{
         hide_div($('#donerLocation'));
     }
 }

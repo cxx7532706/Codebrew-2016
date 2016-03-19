@@ -4,6 +4,14 @@ class PostsController < ApplicationController
 
   protect_from_forgery :secret => 'any_phrase', :except => :collect,:except => :modifyStatus,:except => :getPickUpList, :except => :modifyStatusAgain
 
+  def confirm
+    redirect_to :confirms
+  end
+  def confirms
+
+    @posts = Post.all
+  end
+
 	def index
     #include Paperclip::Glue
 
@@ -27,7 +35,7 @@ class PostsController < ApplicationController
 
     username = request.headers["Username"]
     password = request.headers["Password"]
-    
+
     users = User.all
     user_id = 'None'
     users.each do |user|
@@ -37,7 +45,7 @@ class PostsController < ApplicationController
           end
         end
     end
-    
+
     render text: user_id
   end
 
@@ -101,7 +109,7 @@ class PostsController < ApplicationController
   end
 
   def testpost
-    @params = {'Username' => 'It is ethics. It is honor. -Emily Post', 
+    @params = {'Username' => 'It is ethics. It is honor. -Emily Post',
       'Password' => 'Submit'}
     @x = Net::HTTP.post_form(URI.parse('https://go-get-it.herokuapp.com/collect'), @params)
     #render text: @x.body

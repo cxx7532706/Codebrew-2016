@@ -10,8 +10,13 @@ Rails.application.routes.draw do
 
   resources :users
   post 'login', to: 'users#login'
-  
-  resources :posts
+  get 'confirms', to: 'posts#confirms'
+
+  resources :posts do
+    member do
+      get 'confirm'
+    end
+  end
 
   namespace :api do
     resources :posts, defaults: { format: 'json' }

@@ -3,3 +3,5 @@
 <% @posts.each do |post| %>
   <h2> <%= link_to post.item, post %> </h2>
 <% end %>
+
+<p> <%= link_to 'Add new food', new_post_path %> </p>

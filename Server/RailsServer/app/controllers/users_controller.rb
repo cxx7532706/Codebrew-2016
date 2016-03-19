@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  skip_before_filter :verify_authenticity_token
 
   def login
     @check_user = User.new(user_params)

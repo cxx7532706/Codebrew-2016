@@ -1,6 +1,31 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
+  def login
+    @check_user = User.new(user_params)
+    @users = User.all
+    @jump = 0
+    @users.each do |user|
+      if user.email == @check_user.email
+        if user.password == @check_user.password
+          if user.user_type == "Doner"
+            @jump = 1
+          else
+            @jump = 2
+          end
+        end
+      end
+    end
+    respond_to do |format|
+      if @jump == 0
+       format.html { redirect_to users_url, notice: 'Username or Password is not matched.'}
+      elsif @jump == 1 # when user is donater
+       format.html { redirect_to posts_url}
+      elsif @jump == 2 #when user is collecter
+       format.html {redirect_to user}
+      end
+    end
+  end
   # GET /users
   # GET /users.json
   def index
@@ -69,6 +94,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :password, :location, :user_type)
+      params.require(:user).permit(:name, :password, :location, :user_type, :email)
     end
 end

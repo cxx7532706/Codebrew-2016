@@ -8,7 +8,11 @@ class UsersController < ApplicationController
     @users.each do |user|
       if user.email == @check_user.email
         if user.password == @check_user.password
-          @jump = user.user_type
+          if user.user_type == "Doner"
+            @jump = 1
+          else
+            @jump = 2
+          end
         end
       end
     end
@@ -46,8 +50,6 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-    puts "fuck"
-    puts @user.user_type
 
     respond_to do |format|
       if @user.save

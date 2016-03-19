@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 20160319084416) do
     t.string   "email"
     t.string   "password"
     t.string   "location"
-    t.integer  "user_type"
+    t.string   "user_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

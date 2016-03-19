@@ -22,8 +22,8 @@ default: &default
   pool: 5
 
   host: localhost
-  username: oscar
-  password: oscar
+  username: postgres
+  password: postgres
 
 development:
   <<: *default

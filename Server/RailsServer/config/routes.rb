@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
 
+  root 'users#index'
   match '/collect' => 'posts#collect', via: :post#, as: 'collect'
   match '/testpost' => 'posts#testpost', via: :get#, as: 'login'
 
-  resources :users do
-    get 'go_check' => 'users#check'
-  end
 
+  resources :users
+  post 'login', to: 'users#login'
+  
   resources :posts
 
   namespace :api do

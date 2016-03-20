@@ -115,13 +115,18 @@ class PostsController < ApplicationController
   end
 
   def create
-    #expir = DateTime.new(params[:post]["expir(1i)"].to_i, params[:post]["expir(2i)"].to_i, params[:post]["expir(3i)"].to_i, params[:post]["expir(4i)"].to_i, params[:post]["expir(5i)"].to_i)
     available_time_start = DateTime.new(params[:post]["available_time_start(1i)"].to_i, params[:post]["available_time_start(2i)"].to_i, params[:post]["available_time_start(3i)"].to_i, params[:post]["available_time_start(4i)"].to_i, params[:post]["available_time_start(5i)"].to_i)
     available_time_end = DateTime.new(params[:post]["available_time_end(1i)"].to_i, params[:post]["available_time_end(2i)"].to_i, params[:post]["available_time_end(3i)"].to_i, params[:post]["available_time_end(4i)"].to_i, params[:post]["available_time_end(5i)"].to_i)
 
+    @currUser = UsersHelper.current_user
+
+    puts @currUser.name
+    puts @currUser.name
+    puts @currUser.name
+
     @post = Post.new(post_params)
     @post.update(status: 0)
-    #@post.update(expir: expir)
+    @post.update(super: @currUser.name)
     @post.update(available_time_start: available_time_start)
     @post.update(available_time_end: available_time_end)
 
@@ -152,6 +157,6 @@ class PostsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def post_params
-    params.require(:post).permit(:item, :description, :quantity, :loc, :super, :org, :expir)
+    params.require(:post).permit(:item, :description, :quantity, :loc, :expir)
   end
 end

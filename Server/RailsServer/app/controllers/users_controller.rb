@@ -9,6 +9,8 @@ class UsersController < ApplicationController
     @users.each do |user|
       if user.email == @check_user.email
         if user.password == @check_user.password
+          UsersHelper.setCurr user
+
           if user.user_type == "Doner"
             @jump = 1
           else
@@ -27,6 +29,7 @@ class UsersController < ApplicationController
       end
     end
   end
+
   # GET /users
   # GET /users.json
   def index

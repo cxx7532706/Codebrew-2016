@@ -6,6 +6,11 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 Post.create(:item => "Potatoes", :quantity => 10, :expir => DateTime.new(2016,2,3,4,5,6), 
-  :picktime => DateTime.new(2016,2,3,4,5,6), :loc => "Loc", :super => "IGA", :org => "org1", 
+  :picktime => nil, :loc => "Loc", :super => "IGA", :org => "org1", 
   :available_time_start => DateTime.new(2016,2,3,4,5,6), :available_time_end => DateTime.new(2016,2,3,5,5,6), 
   :status => 0, :image => nil, :description => "Potatoes")
+Post.create(:item => "Potatoes", :quantity => 10, :expir => DateTime.new(2016,2,3,4,5,6), 
+  :picktime => DateTime.new(2016,2,3,4,5,6), :loc => "Loc", :super => "IGA", :org => "org1", 
+  :available_time_start => DateTime.new(2016,2,3,4,5,6), :available_time_end => DateTime.new(2016,2,3,5,5,6), 
+  :status => 1, :image => nil, :description => "Potatoes")
+User.create(:name => "oscar", :email => "email@163.com", :password => "a", :location => "522 Queensberry", :user_type => "Doner")

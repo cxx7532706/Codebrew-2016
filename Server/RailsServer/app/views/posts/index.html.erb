@@ -18,7 +18,7 @@
                         <td><%= link_to post.item, post, :class =>"btn btn-info btn-sm white-font survey-btn"%></td>
                         <td><%= post.quantity %></td>
                         <td><%= post.expir.to_formatted_s(:db) %></td>
-                        <td><%= post.available_time_start.to_formatted_s(:db) %>-<%= post.available_time_end.to_formatted_s(:db) %></td>
+                        <td>From: <%= post.available_time_start.to_formatted_s(:db) %> to: <%= post.available_time_end.to_formatted_s(:db) %></td>
                         <td>
                           <% if post.status == 0 %>
                             <%= link_to 'Edit', edit_post_path(post), :class =>"btn btn-warning btn-sm white-font survey-btn" %>

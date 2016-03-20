@@ -1,8 +1,35 @@
-<h2>Food: <%= @post.item %> </h2>
-<h2>Description: <%= @post.description %> </h2>
-<h2>Quantity: <%= @post.quantity %> kg </h2>
-<h2>Expire date: <%= @post.expir %> </h2>
-<h2>Available from:</h2> <%= @post.available_time_start %> 
-<h2>to:</h2> <%= @post.available_time_end %> 
-<h2>Provider: <%= @post.super %> </h2>
-<h2>Location: <%= @post.loc %> </h2>
+<table class="table table-striped table-bordered table-hover" id="dataTables-example">
+  <tbody>
+    <tr>
+      <th>Foods</th>
+      <th><%= @post.item %></th>
+    </tr>
+    <tr>
+      <th>Description</th>
+      <th><%= @post.description %></th>
+    </tr>
+    <tr>
+      <th>Quantity</th>
+      <th><%= @post.quantity %> kg</th>
+    </tr>
+    <tr>
+      <th>Location</th>
+      <th><%= @post.loc %></th>
+    </tr>
+    <tr>
+      <th>
+        <label>Available from: </label>
+        <%= @post.available_time_start %>
+        <label>to: </label>
+        <%= @post.available_time_end %>
+      </th>
+    </tr>
+    <tr>
+      <th>Expire date</th>
+      <th><%= @post.expir %></th>
+    </tr>
+    <tr>
+      <th>Picture</th>
+      <th><img src=<%= @post.image.url %>></th>
+    </tr>
+</table>

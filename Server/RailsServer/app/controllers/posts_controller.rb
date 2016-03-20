@@ -9,30 +9,18 @@ class PostsController < ApplicationController
   end
 
   def confirms
-
     @posts = Post.all
   end
 
 	def index
-    #include Paperclip::Glue
     @posts = Post.all
-    #@accepted = Post.where(status: 1)
-    #@newPosts = Post.where(status: 0)
 	end
 
   def show
-    #include Paperclip::Glue
-
     @post = Post.find(params[:id])
   end
 
   def collect
-    #puts request.headers
-
-    #username = request.headers["Username"]
-    #password = request.headers["Password"]
-
-   # render text: 1
    puts request.headers
 
     username = request.headers["Username"]
@@ -40,12 +28,13 @@ class PostsController < ApplicationController
 
     users = User.all
     user_id = 'None'
+    
     users.each do |user|
-        if user.email == username && user.password == password
-          if user.user_type == 'Charity'
-            user_id = user.id.to_s
-          end
+      if user.email == username && user.password == password
+        if user.user_type == 'Charity'
+          user_id = user.id.to_s
         end
+      end
     end
 
     render text: user_id
@@ -54,8 +43,6 @@ class PostsController < ApplicationController
   def getPickUpList
     puts request.headers
     charity = request.headers["Charity"]
-
-    #newposts = Post.where(org: charity).find_each
     newposts = Post.where(status: 1).where(org: charity).find_each
 
     respond_to do |format|
@@ -120,21 +107,39 @@ class PostsController < ApplicationController
 
     @currUser = UsersHelper.current_user
 
-    puts @currUser.name
-    puts @currUser.name
-    puts @currUser.name
-
     @post = Post.new(post_params)
     @post.update(status: 0)
     @post.update(super: @currUser.name)
     @post.update(available_time_start: available_time_start)
     @post.update(available_time_end: available_time_end)
 
+    # Upload image
+    @post.image = params[:file]
+
+    #@post.image.url # => '/url/to/file.png'
+    #@post.image.current_path # => 'path/to/file.png'
+    #@post.image.identifier # => 'file.png'
+
     if @post.save
       redirect_to posts_path#, :notice => 'Successfully uploaded'
     else
       render "new"
     end
+  end
+
+  def uploadImage post
+    require 'carrierwave/orm/activerecord'
+
+    uploader = PictureUploader.new
+    uploader.store!(my_file)
+
+    u = User.new(params[:user])
+    u.save!
+    u.image.url # => '/url/to/file.png'
+    u.image.current_path # => 'path/to/file.png'
+    u.image.identifier # => 'file.png'
+
+    #uploader.retrieve_from_store!('my_file.png')
   end
 
   def edit
@@ -157,6 +162,6 @@ class PostsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def post_params
-    params.require(:post).permit(:item, :description, :quantity, :loc, :expir)
+    params.require(:post).permit(:item, :description, :quantity, :loc, :expir, :image)
   end
 end

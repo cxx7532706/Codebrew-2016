@@ -24,8 +24,12 @@
     <%= f.datetime_select :available_time_end, class: "form-control" %>
   </div>
   <div class="field">
-    <%= f.label :expir %><br>
+    <%= f.label 'Expire date' %><br>
     <%= f.date_field :expir, class: "form-control" %>
+  </div>
+  <div class="field">
+    <%= f.label 'Expire date' %><br>
+    <%= f.file_field :image, multiple: false %>
   </div>
   <div class="actions">
       <%= f.submit "Submit" , class:"btn btn-success "%>
